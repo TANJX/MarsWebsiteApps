@@ -1,0 +1,53 @@
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.apps {
+  display: flex;
+  transition: .2s;
+}
+
+.app:hover {
+  opacity: .8;
+}
+
+.app {
+  flex-grow: 1;
+  width: calc(100% / 6);
+  text-align: center;
+}
+
+
+.app h2 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+.app-icon {}
+
+
+@media (max-width: 991px) {
+  .apps {
+    flex-wrap: wrap;
+  }
+  .app {
+    width: 33.3%;
+  }
+}
+
+@media (max-width: 576px) {
+  .apps {
+    width: 80%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .app {
+    width: 50%;
+  }
+  .app h2 {
+    font-size: 1.0rem;
+  }
+}

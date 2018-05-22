@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Add an event | Mars Inc.</title>
+  <script>
+    function validateForm() {
+      var a = document.forms["Form"]["msg"].value;
+      if (a == null || a == "") {
+        document.getElementById("error-box").style.display = "block";
+        return false;
+      }
+      document.getElementById("error-box").style.display = "none";
+      return true;
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1 class="mars">Mars Login</h1>
+    <div style="display: none;" id="error-box" class="alert alert-danger" role="alert">
+      Please Fill All Required Field
+    </div>
+    <form method="post" action="" class="mt-5" name="Form" onsubmit="return validateForm();">
+      <div class=" form-group ">
+        <label for="inputName " class="bmd-label-floating ">Name</label>
+        <input name="name" value="" class="form-control " placeholder="Mars only" type="text" />
+      </div>
+      <div class="form-group ">
+        <label for="inputDate " class="bmd-label-floating ">Password</label>
+        <input name="password" value="" class="form-control " type="password" required />
+      </div>
+      <input type="submit" value="SUBMIT" class="btn btn-primary btn-raised ">
+    </form>
+  </div>
+
+</body>
+
+</html>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/css/bootstrap-material-design.min.css" integrity="sha384-k5bjxeyx3S5yJJNRD1eKUMdgxuvfisWKku5dwHQq9Q/Lz6H8CyL89KF52ICpX4cL" crossorigin="anonymous">
+<link rel="stylesheet" href="login.css">

@@ -1,0 +1,19 @@
+Scales
+Scales a third apart
+Scales a sixth apart
+Chord
+	Legato scales in thirds
+	Chromatic Scales a minor third apart
+Chromatic Scales
+	Chromatic Scales in major thirds
+	Chromatic Scales in minor thirds
+	Chromatic Scales in major sixth
+	Chromatic Scales in minor sixth
+	Chromatic Scales in perfect eighth
+	Chromatic Scales in perfect eighth in reversed direction
+	Chromatic Scales in major thirds in reversed direction
+	Chromatic Scales in minor thirds in reversed direction
+Whole-tone scales
+Arpeggios
+Dominant sevenths
+Diminished sevenths

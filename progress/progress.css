@@ -1,0 +1,23 @@
+.bar-wrapper {
+ padding: 10px 0px 20px;
+}
+
+.bar-info h2 {
+ font-size: 1.5rem;
+}
+
+.bar {
+ background-color: gainsboro;
+ display: block;
+ height: 25px;
+ position: relative;
+ border-radius: .2rem;
+ overflow: hidden;
+}
+
+.progress-bar {
+ background-color: limegreen;
+ display: block;
+ position: absolute;
+ height: 25px;
+}

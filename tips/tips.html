@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>TIPS | Mars Inc.</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116224796-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-116224796-1');
+
+  </script>
+</head>
+
+<body>
+  <div class="title ">
+    <div class="container">
+      <h1>Tips</h1>
+      <p>Quick and responsive calculation</p>
+    </div>
+  </div>
+  <div class="main container">
+    <form>
+      <div class="form-group">
+        <label for="inputPrice">Price</label>
+        <div class="input-wrapper">
+          <span>$</span>
+          <input type="number" class="form-control" id="inputPrice" step="0.01" oninput="calc(0)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputTips">Tips</label>
+        <div class="input-wrapper">
+          <span>$</span>
+          <input type="number" class="form-control" id="inputTips" step="0.01" oninput="calc(1)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPercent">Tips Percent</label>
+        <div class="input-wrapper">
+          <span>%</span>
+          <input type="number" class="form-control" id="inputPercent" step="0.1" oninput="calc(2)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputTotal">Total</label>
+        <div class="input-wrapper">
+          <span>$</span>
+          <input type="number" class="form-control" id="inputTotal" step="0.01" oninput="calc(3)">
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+<script>
+  function calc(i) {
+    var price = parseFloat(document.getElementById("inputPrice").value);
+    switch (i) {
+      case (0):
+        var percent = parseFloat(document.getElementById("inputPercent").value);
+        document.getElementById("inputTips").value = (price * (percent / 100)).toFixed(2);
+        document.getElementById("inputTotal").value = (price + parseFloat(document.getElementById("inputTips").value)).toFixed(2);
+        break;
+      case (1):
+        var tips = parseFloat(document.getElementById("inputTips").value);
+        document.getElementById("inputPercent").value = (tips / price * 100).toFixed(2);
+        document.getElementById("inputTotal").value = (tips + price).toFixed(2);
+        break;
+      case (2):
+        var percent = parseFloat(document.getElementById("inputPercent").value);
+        document.getElementById("inputTips").value = (price * (percent / 100)).toFixed(2);
+        document.getElementById("inputTotal").value = (price + parseFloat(document.getElementById("inputTips").value)).toFixed(2);
+        break;
+      case (3):
+        var total = parseFloat(document.getElementById("inputTotal").value);
+        document.getElementById("inputPercent").value = ((total - price) / price * 100).toFixed(2);
+        document.getElementById("inputTips").value = (total - price).toFixed(2);
+        break;
+    }
+  }
+
+</script>
+
+</html>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.3/dist/css/bootstrap-material-design.min.css" integrity="sha384-k5bjxeyx3S5yJJNRD1eKUMdgxuvfisWKku5dwHQq9Q/Lz6H8CyL89KF52ICpX4cL" crossorigin="anonymous">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/menu.css">
+<link rel="stylesheet" href="tips.css">

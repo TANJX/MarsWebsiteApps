@@ -1,0 +1,27 @@
+.title {
+  background-color: #c0f2bd;
+}
+
+.main {
+  margin-top: 50px;
+}
+
+.main label {
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+.main input {
+
+  font-size: 2rem;
+}
+
+.input-wrapper span {
+  font-size: 1.9rem;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.input-wrapper {
+  display: flex;
+}

@@ -1,0 +1,14 @@
+DirectorySlash off
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*[^/])$ /$1/ [L,R] # <- for test, for prod use [L,R=301]
+RewriteRule ^event/new/$ event/newevent.html [NC,L]
+RewriteRule ^event/$ event/event.php [NC,L]
+RewriteRule ^log/new/$ log/newlog.html [NC,L]
+RewriteRule ^log/$ log/log.php [NC,L]
+RewriteRule ^progress/new/$ progress/newprogress.html [NC,L]
+RewriteRule ^progress/$ progress/progress.php [NC,L]
+RewriteRule ^music/$ music/index.php [NC,L]
+RewriteRule ^japanese/$ japanese/index.php [NC,L]
+RewriteRule ^login/$ login/login.php [NC,L]
+RewriteRule ^tips/$ tips/tips.html [NC,L]
