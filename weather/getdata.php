@@ -1,8 +1,5 @@
 <?php
 
-$temp = $_REQUEST['temp'];
-$humid = $_REQUEST['humid'];
-
 $mysqli = new mysqli('127.0.0.1', 'root', 'Tjx,54321', 'marsapp');
 if ($mysqli->connect_errno) {
 
@@ -18,12 +15,19 @@ if ($mysqli->connect_errno) {
   // You might want to show them something nice, but we will simply exit
   exit;
 }
-$sql = "INSERT INTO `weather` (`time`, `temperature`, `humidity`) VALUES (CURRENT_TIMESTAMP, '" . $temp . "', '" . $humid . "')";
 
-if ($mysqli->query($sql) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $mysqli->error;
+$sql = "SELECT * FROM `weather`";
+
+$result = $mysqli->query($sql);
+$count = 0;
+$json = array();
+while ($row = $result->fetch_assoc()) {
+  $json[$count]->time = $row["time"];
+  $json[$count]->temperature = $row["temperature"];
+  $json[$count]->humidity = $row["humidity"];
+  $count++;
 }
 
 $mysqli->close();
+
+echo json_encode($json);
