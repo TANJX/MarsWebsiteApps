@@ -23,19 +23,19 @@
     xmlhttp.open("GET", "getdata.php", true);
     xmlhttp.send();
 
+    var date = [];
+    var temperature = [];
+    var humidity = [];
+
     function updateChart() {
         // based on prepared DOM, initialize echarts instance
         var myChart = echarts.init(document.getElementById('main'));
-        var base = +new Date(1968, 9, 3);
-        var oneDay = 24 * 3600 * 1000;
-        var date = [];
-        var temperature = [];
-        var humidity = [];
 
         for (var i = 0; i < myObj.length; i++) {
-            date.push(myObj[i].time);
-            temperature.push(myObj[i].temperature);
-            humidity.push(myObj[i].humidity);
+            temperature.push([new Date(myObj[i].time),
+                myObj[i].temperature]);
+            humidity.push([new Date(myObj[i].time),
+                myObj[i].humidity]);
         }
 
         option = {
@@ -59,9 +59,8 @@
                 }
             },
             xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: date
+                type: 'time',
+                boundaryGap: false
             },
             yAxis: {
                 type: 'value',
