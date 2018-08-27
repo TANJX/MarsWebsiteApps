@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-2 {
+      fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="960.5" y1="131.66" x2="960.5" y2="732.25" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8bcac8"/>
+      <stop offset="0.03" stop-color="#8fc7c7" stop-opacity="0.96"/>
+      <stop offset="0.51" stop-color="#cb9eb9" stop-opacity="0.45"/>
+      <stop offset="0.84" stop-color="#f085b0" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#ff7bac" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <title>landscape</title>
+  <g id="bg">
+    <rect class="cls-2" x="-60" width="2041" height="710"/>
+  </g>
+</svg>
