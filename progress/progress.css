@@ -1,5 +1,5 @@
 .bar-wrapper {
- padding: 10px 0px 20px;
+ padding: 10px 0 20px;
 }
 
 .bar-info h2 {
@@ -20,4 +20,17 @@
  display: block;
  position: absolute;
  height: 25px;
+}
+
+.bar {
+  position: relative;
+}
+
+.percent {
+  position: absolute;
+  z-index: 5;
+  left: calc(50% - 20px);
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
