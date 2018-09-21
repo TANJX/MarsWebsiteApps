@@ -4,18 +4,19 @@ if(empty($_SESSION["id"])) {
     echo "Not Logged in";
     exit;
 }
+
 $name = $_POST['name'];
 $date = $_POST['date'];
 $type = $_POST['type'];
-$link = mysql_connect('marstanjxcom.ipagemysql.com', 'mars', 'root'); 
-if (!$link) { 
-    die('Could not connect: ' . mysql_error()); 
+
+$mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
+if ($mysqli->connect_errno) {
+  exit;
 }
-mysql_select_db('marsql');
-//设置mysql字符编码
-mysql_query("set names utf8;");
-//insert语句
-$insert = "insert into event (name,date,type) values ('$name','$date','$type')";
-$res_insert = mysql_query($insert);
+$mysqli->query("set names utf8;");
+
+$sql = "INSERT INTO event (name,date,type) VALUES ('$name','$date','$type')";
+$mysqli->query($sql);
+$mysqli->close();
 header("Location: http://apps.marstanjx.com/event/");
-exit;
+

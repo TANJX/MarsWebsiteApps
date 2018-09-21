@@ -37,35 +37,35 @@
 
 <div class="container">
   <?php
-  $conn = mysql_connect('marstanjxcom.ipagemysql.com', 'mars', 'root');
-  mysql_select_db('marsql');
-  mysql_query("set names utf8;");
+  $mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
+  if ($mysqli->connect_errno) {
+    exit;
+  }
+  $mysqli->query("set names utf8;");
 
-  $sql = sprintf("select * from paste ORDER BY date DESC;");
-  $result = mysql_query($sql, $conn);
-  echo $thstr;
-  while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+  $sql = "SELECT * FROM paste ORDER BY date DESC;";
+  $result = $mysqli->query($sql);
+  while ($row = $result->fetch_assoc()) {
     echo "<div class='card event-block clearfix ";
     echo "$row[type]";
     echo "'>";
-    if ($row[type] === 'image') {
-      echo '<a href="' . $row[content] . '" target="_blank">';
+    if ($row['type'] === 'image') {
+      echo '<a href="' . $row['content'] . '" target="_blank">';
       echo '<img class="image" style="width: 100%" src="';
-      echo $row[content];
+      echo $row['content'];
       echo '">';
       echo "</a>";
     } else {
       echo "<div class='content'>";
-      echo $row[content];
+      echo $row['content'];
       echo "</div>";
     }
     echo "<p>";
-    echo $row[date];
+    echo $row['date'];
     echo "</p>";
     echo "</div>";
   }
-  mysql_free_result($result);
-  mysql_close($conn);
+  $mysqli->close();
   ?>
 </div>
 

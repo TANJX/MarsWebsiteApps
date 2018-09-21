@@ -1,64 +1,69 @@
- .title {
+.title {
   background-color: greenyellow;
- }
+}
 
- .card {
+.card {
   text-align: center;
   margin: 0 auto;
- }
+}
 
- .event-block {
+.event-block {
   display: block;
   margin: 10px 0;
   padding: 15px 25px;
   text-align: left;
- }
+}
 
- .block-left {
+.block-left {
   float: left;
- }
+}
 
- .block-right {
+.block-right {
   font-size: 1em;
   margin-top: 8px;
   float: right;
   padding: 5px;
   border-radius: .3rem;
- }
+}
 
- .block-right h4 {
+.block-right h4 {
   font-size: 1.3em;
   padding: 0;
   margin: 0;
- }
+}
 
- .past {
+.past {
   background-color: orangered;
   color: white;
- }
+}
 
- .future {
+.future {
   background-color: greenyellow;
- }
+}
 
- .selection-checkboxes div {
+.now {
+  background-color: #00b0f0;
+  color: white;
+}
+
+.selection-checkboxes div {
   display: inline;
   margin-right: 10px;
   margin-left: 10px;
- }
+}
 
- .styled-checkbox {
+.styled-checkbox {
   position: absolute;
   opacity: 0;
- }
+}
 
- .styled-checkbox + label {
+.styled-checkbox + label {
   position: relative;
   cursor: pointer;
   padding: 0;
- }
+}
 
- .styled-checkbox + label:before {
+.styled-checkbox + label:before {
   content: '';
   margin-right: 10px;
   display: inline-block;
@@ -67,22 +72,22 @@
   height: 20px;
   background: #ccc;
   border: 1px solid #999;
- }
+}
 
- .styled-checkbox:hover + label:before {
+.styled-checkbox:hover + label:before {
   background-color: greenyellow;
- }
+}
 
- .styled-checkbox:focus + label:before {
+.styled-checkbox:focus + label:before {
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
- }
+}
 
- .styled-checkbox:checked + label:before {
+.styled-checkbox:checked + label:before {
   background-color: lawngreen;
-  border: 0px solid #999;
- }
+  border: 0 solid #999;
+}
 
- .styled-checkbox:checked + label:after {
+.styled-checkbox:checked + label:after {
   content: '';
   position: absolute;
   left: 5px;
@@ -92,4 +97,4 @@
   height: 2px;
   box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
   transform: rotate(45deg);
- }
+}

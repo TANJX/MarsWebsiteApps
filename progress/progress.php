@@ -22,7 +22,7 @@
       function validateForm() {
           var a = document.forms["Form"]["name"].value;
           echo(a);
-          if (a == null || a == " ") {
+          if (a == null || a === " ") {
               document.getElementById("error-box").style.display = "block";
               return false;
           }

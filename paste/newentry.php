@@ -23,24 +23,26 @@ if (empty($_SESSION["id"])) {
   echo "Not Logged in";
   exit;
 }
+
 $content = $_POST['content'];
 $date = date('Y-m-d H:i:s');
-$link = mysql_connect('marstanjxcom.ipagemysql.com', 'mars', 'root');
-if (!$link) {
-  die('Could not connect: ' . mysql_error());
+
+$mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
+if ($mysqli->connect_errno) {
+  exit;
 }
-mysql_select_db('marsql');
-//设置mysql字符编码
-mysql_query("set names utf8;");
-//insert语句
+$mysqli->query("set names utf8;");
+
 $query = 'data:image/';
 if (substr($content, 0, strlen($query)) === $query) {
   $t = "files/" . time() . ".png";
   base64_to_jpeg($content, $t);
-  $insert = "insert into paste (date,type,content) values ('$date','image','$t')";
+  $sql = "INSERT into paste (date,type,content) VALUES ('$date','image','$t')";
 } else {
-  $insert = "insert into paste (date,type,content) values ('$date','text','$content')";
+  $sql = "INSERT into paste (date,type,content) VALUES ('$date','text','$content')";
 }
-$res_insert = mysql_query($insert);
+
+$mysqli->query($sql);
+$mysqli->close();
 header("Location: http://apps.marstanjx.com/paste");
 exit;

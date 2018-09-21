@@ -1,22 +1,21 @@
 <?php
 session_start();
-if(empty($_SESSION["id"])) {
-    echo "Not Logged in";
-    exit;
+if (empty($_SESSION["id"])) {
+  echo "Not Logged in";
+  exit;
 }
+
 $type = $_POST['type'];
 $start = $_POST['start'];
 $end = $_POST['end'];
-$link = mysql_connect('marstanjxcom.ipagemysql.com', 'mars', 'root'); 
-if (!$link) { 
-    die('Could not connect: ' . mysql_error()); 
+
+$mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
+if ($mysqli->connect_errno) {
+  exit;
 }
-mysql_select_db('marsql'); 
-//设置mysql字符编码
-mysql_query("set names utf8;");
-//insert语句
-$insert = "insert into progress (name,start,end) values ('$type','$start','$end')";
-$res_insert = mysql_query($insert);
+$mysqli->query("set names utf8;");
+
+$sql = "INSERT INTO progress (name,start,end) VALUES ('$type','$start','$end')";
+$mysqli->query($sql);
+$mysqli->close();
 header("Location: http://apps.marstanjx.com/progress/");
-exit;
-?>
