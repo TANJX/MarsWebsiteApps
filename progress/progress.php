@@ -44,12 +44,7 @@
   <a class="nav-link" href="newprogress.html">New Progress Bar</a>
   <div class="bar-wrapper">
     <?php
-    $mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
-    if ($mysqli->connect_errno) {
-      exit;
-    }
-    $mysqli->query("set names utf8;");
-
+    include('../php/database.php');
     $sql = "SELECT * FROM progress;";
     $result = $mysqli->query($sql);
     while ($row = $result->fetch_assoc()) {

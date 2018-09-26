@@ -18,8 +18,8 @@ function base64_to_jpeg($base64_string, $output_file)
   return $output_file;
 }
 
-session_start();
-if (empty($_SESSION["id"])) {
+include('../php/validate.php');
+if (!validateCookie()) {
   echo "Not Logged in";
   exit;
 }
@@ -27,11 +27,7 @@ if (empty($_SESSION["id"])) {
 $content = $_POST['content'];
 $date = date('Y-m-d H:i:s');
 
-$mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
-if ($mysqli->connect_errno) {
-  exit;
-}
-$mysqli->query("set names utf8;");
+include('../php/database.php');
 
 $query = 'data:image/';
 if (substr($content, 0, strlen($query)) === $query) {

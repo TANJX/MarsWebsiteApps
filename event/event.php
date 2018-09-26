@@ -62,11 +62,7 @@
 
   <?php
 
-  $mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
-  if ($mysqli->connect_errno) {
-    exit;
-  }
-  $mysqli->query("set names utf8;");
+  include('../php/database.php');
 
   $sql = "SELECT * FROM event ORDER BY date ASC;";
   $result = $mysqli->query($sql);

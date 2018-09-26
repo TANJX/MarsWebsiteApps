@@ -57,11 +57,7 @@
   <a class="nav-link" href="newlog.html">New Log</a>
   <?php
 
-  $mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
-  if ($mysqli->connect_errno) {
-    exit;
-  }
-  $mysqli->query("set names utf8;");
+  include('../php/database.php');
   $sql = "SELECT * FROM log ORDER BY time DESC;";
   $result = $mysqli->query($sql);
 

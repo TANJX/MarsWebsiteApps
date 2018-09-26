@@ -1,6 +1,6 @@
 <?php
-session_start();
-if (empty($_SESSION["id"])) {
+include('../php/validate.php');
+if (!validateCookie()) {
   echo "Not Logged in";
   exit;
 }
@@ -9,12 +9,7 @@ $type = $_POST['type'];
 $start = $_POST['start'];
 $end = $_POST['end'];
 
-$mysqli = new mysqli('marstanjxcom.ipagemysql.com', 'mars', 'root', 'marsql');
-if ($mysqli->connect_errno) {
-  exit;
-}
-$mysqli->query("set names utf8;");
-
+include('../php/database.php');
 $sql = "INSERT INTO progress (name,start,end) VALUES ('$type','$start','$end')";
 $mysqli->query($sql);
 $mysqli->close();
