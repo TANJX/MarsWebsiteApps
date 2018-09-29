@@ -32,24 +32,34 @@
   margin: 0;
 }
 
-.past {
+.past .block-right {
   background-color: orangered;
   color: white;
 }
 
-.future {
+.future .block-right {
   background-color: greenyellow;
 }
 
-.now {
+.now .block-right {
   background-color: #00b0f0;
   color: white;
 }
 
-.selection-checkboxes div {
+.selection-checkboxes div div {
   display: inline;
   margin-right: 10px;
   margin-left: 10px;
+}
+
+.selection-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.right {
+  margin-left: auto;
 }
 
 .styled-checkbox {
@@ -97,4 +107,17 @@
   height: 2px;
   box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
   transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .left {
+    padding-bottom: 10px;
+  }
+
+  .right {
+    padding-top: 10px;
+    width: 100%;
+    margin-left: 0;
+    border-top: 1px solid #787878;
+  }
 }

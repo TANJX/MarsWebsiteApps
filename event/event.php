@@ -36,27 +36,42 @@
   </div>
 </div>
 <div class="container">
-  <a class="nav-link" href="newevent.html">New Event</a>
+  <div class="nav-link">
+    <a href="newevent.html">New Event</a>
+  </div>
 
-  <div class="selection-checkboxes">
-    <div>
-      <input class="styled-checkbox" id="checkbox-1" type="checkbox" value="value1" onclick="calc(1);" checked>
-      <label for="checkbox-1">All</label>
+  <div class="selection-checkboxes clearfix">
+    <div class="left">
+      <div>
+        <input class="styled-checkbox" id="type-all" type="checkbox" value="value1" onclick="update(1);" checked>
+        <label for="type-all">All</label>
+      </div>
+      <div>
+        <input class="styled-checkbox" id="type-1" type="checkbox" value="value2" onclick="update(0);" checked>
+        <label for="type-1">Life</label>
+      </div>
+      <div>
+        <input class="styled-checkbox" id="type-2" type="checkbox" value="value3" onclick="update(0);" checked>
+        <label for="type-2">School</label>
+      </div>
+      <div>
+        <input class="styled-checkbox" id="type-3" type="checkbox" value="value4" onclick="update(0);" checked>
+        <label for="type-3">Work</label>
+      </div>
     </div>
-
-    <div>
-      <input class="styled-checkbox" id="checkbox-2" type="checkbox" value="value2" onclick="calc(2);" checked>
-      <label for="checkbox-2">Life</label>
-    </div>
-
-    <div>
-      <input class="styled-checkbox" id="checkbox-3" type="checkbox" value="value3" onclick="calc(3);" checked>
-      <label for="checkbox-3">School</label>
-    </div>
-
-    <div>
-      <input class="styled-checkbox" id="checkbox-4" type="checkbox" value="value4" onclick="calc(4);" checked>
-      <label for="checkbox-4">Work</label>
+    <div class="right">
+      <div>
+        <input class="styled-checkbox" id="time-all" type="checkbox" value="value5" onclick="update(2);" checked>
+        <label for="time-all">All</label>
+      </div>
+      <div>
+        <input class="styled-checkbox" id="time-1" type="checkbox" value="value6" onclick="update(0);" checked>
+        <label for="time-1">Past</label>
+      </div>
+      <div>
+        <input class="styled-checkbox" id="time-2" type="checkbox" value="value7" onclick="update(0);" checked>
+        <label for="time-2">Future</label>
+      </div>
     </div>
   </div>
 
@@ -68,9 +83,19 @@
   $result = $mysqli->query($sql);
   while ($row = $result->fetch_assoc()) {
     date_default_timezone_set('America/Los_Angeles');
+    $now = new DateTime('now');
+    $date = new DateTime($row['date']);
+    $interval = $date->diff($now);
 
     echo "<div class='card event-block clearfix ";
-    echo "$row[type]";
+    echo "$row[type] ";
+    if ($interval->days == 0) {
+      echo "now";
+    } else if ($interval->invert == 1) {
+      echo "future";
+    } else {
+      echo "past";
+    }
     echo "'>";
     echo "<div class='block-left'>";
     echo "<h4 class=''>";
@@ -79,9 +104,6 @@
     echo "<h6 class='text-muted'>";
     echo "$row[date]";
     echo "</h6></div>";
-    $now = new DateTime('now');
-    $date = new DateTime($row['date']);
-    $interval = $date->diff($now);
     if ($interval->days == 0) {
       echo "<div class='block-right now'>";
       echo "<h4>";
@@ -103,51 +125,76 @@
   ?>
 
 </div>
-<?php
-$doc = new DOMDocument();
-$doc->loadHTMLFile("../menu.htm");
-echo $doc->saveHTML();
-?>
+<div class="container">
+  <?php
+  $doc = new DOMDocument();
+  $doc->loadHTMLFile("../menu.htm");
+  echo $doc->saveHTML();
+  ?>
+</div>
 </body>
 
 <script>
-    function calc(i) {
-        if (i === 1 && document.getElementById('checkbox-1').checked) {
-            document.getElementById("checkbox-2").checked = true;
-            document.getElementById("checkbox-3").checked = true;
-            document.getElementById("checkbox-4").checked = true;
+    function update(all) {
+        if (all === 1) {
+            document.getElementById("type-1").checked = document.getElementById("type-all").checked;
+            document.getElementById("type-2").checked = document.getElementById("type-all").checked;
+            document.getElementById("type-3").checked = document.getElementById("type-all").checked;
+        } else if (all === 2) {
+            document.getElementById("time-1").checked = document.getElementById("time-all").checked;
+            document.getElementById("time-2").checked = document.getElementById("time-all").checked;
         }
-        if (i === 1 && !document.getElementById('checkbox-1').checked) {
-            document.getElementById("checkbox-2").checked = false;
-            document.getElementById("checkbox-3").checked = false;
-            document.getElementById("checkbox-4").checked = false;
-        }
-        if (i > 1 && !document.getElementById("checkbox-" + i).checked) {
-            document.getElementById("checkbox-1").checked = false;
-        }
-        let items = document.getElementsByClassName("life");
+
+        // type settings
+        const type1 = document.getElementById("type-1").checked,
+            type2 = document.getElementById("type-2").checked,
+            type3 = document.getElementById("type-3").checked;
+        document.getElementById("type-all").checked = type1 && type2 && type3;
+
+        // time settings
+        const time1 = document.getElementById("time-1").checked,
+            time2 = document.getElementById("time-2").checked;
+        document.getElementById("time-all").checked = time1 && time2;
+
+        const items = document.getElementsByClassName('event-block');
         let j;
         for (j = 0; j < items.length; j++) {
-            if (document.getElementById("checkbox-2").checked)
-                items[j].style.display = "block";
-            else
-                items[j].style.display = "none";
-        }
-        items = document.getElementsByClassName("school");
-        for (j = 0; j < items.length; j++) {
-            if (document.getElementById("checkbox-3").checked)
-                items[j].style.display = "block";
-            else
-                items[j].style.display = "none";
-        }
-        items = document.getElementsByClassName("work");
-        for (j = 0; j < items.length; j++) {
-            if (document.getElementById("checkbox-4").checked)
-                items[j].style.display = "block";
-            else
-                items[j].style.display = "none";
+            if (items[j].classList.contains('life')) {
+                if (type1) {
+                    items[j].style.display = "block";
+                } else {
+                    items[j].style.display = "none";
+                }
+            } else if (items[j].classList.contains('school')) {
+                if (type2) {
+                    items[j].style.display = "block";
+                } else {
+                    items[j].style.display = "none";
+                }
+            } else if (items[j].classList.contains('work')) {
+                if (type3) {
+                    items[j].style.display = "block";
+                } else {
+                    items[j].style.display = "none";
+                }
+            }
+            if (items[j].style.display === "block") {
+                if (items[j].classList.contains('past')) {
+                    if (!time1) {
+                        items[j].style.display = "none";
+                    }
+                }
+                else {
+                    if (!time2) {
+                        items[j].style.display = "none";
+                    }
+                }
+            }
         }
     }
+
+    document.getElementById("time-1").checked = false;
+    update();
 
 </script>
 
