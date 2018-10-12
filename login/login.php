@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "We could not find a match for ID " . $_POST['name'] . "sorry about that. Please try again.";
     exit;
   }
-  setcookie('username', $_POST['name'], time() + 60 * 60 * 24 * 7, "/");
-  setcookie('password', sha1($_POST['password']), time() + 60 * 60 * 24 * 7, "/");
+  setcookie('username', $_POST['name'], time() + 60 * 60 * 24 * 30, "/");
+  setcookie('password', sha1($_POST['password']), time() + 60 * 60 * 24 * 30, "/");
   header("Location: http://apps.marstanjx.com/");
   exit;
 }

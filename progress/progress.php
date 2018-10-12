@@ -64,7 +64,20 @@
       if ($interval1->invert == 1) $diff = 0;
       echo "$row[name]";
       echo "</h2></div>";
-      echo "<div class='bar'><div class='percent'><p>" . round(min(100, $diff * 100),2) . "%</p></div><div class='progress-bar' style='width: " . ($diff * 100) . "%'> </div></div></div>";
+      echo "<div class='bar'>";
+      echo "<div class='percent'><p>" . round(min(100, $diff * 100), 2) . "%</p></div>";
+      if ($interval1->invert) {
+        // now > end date
+        echo "<div class='days-left'><p>" . $interval1->days . " days left</p></div>";
+      } else if ($now->diff($enddate)->invert) {
+        // now < end date
+        echo "<div class='days-left'><p>" . $enddate->diff($now)->days . " days passed</p></div>";
+      } else {
+        echo "<div class='days-left'><p>" . $interval1->days . " days passed " . ($interval2->days - $interval1->days) . " days left</p></div>";
+      }
+      echo "<div class='start'><p>" . $startdate->format('Y-m-d') . "</p></div>";
+      echo "<div class='end'><p>" . $enddate->format('Y-m-d') . "</p></div>";
+      echo "<div class='progress-bar' style='width: " . ($diff * 100) . "%'> </div></div></div>";
     }
     $mysqli->close();
     ?>

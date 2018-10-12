@@ -1,36 +1,70 @@
 .bar-wrapper {
- padding: 10px 0 20px;
+  padding: 10px 0 20px;
 }
 
 .bar-info h2 {
- font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .bar {
- background-color: gainsboro;
- display: block;
- height: 25px;
- position: relative;
- border-radius: .2rem;
- overflow: hidden;
+  background-color: gainsboro;
+  display: block;
+  height: 25px;
+  position: relative;
+  border-radius: .2rem;
+  overflow: hidden;
 }
 
 .progress-bar {
- background-color: limegreen;
- display: block;
- position: absolute;
- height: 25px;
+  background-color: limegreen;
+  display: block;
+  position: absolute;
+  height: 25px;
 }
 
 .bar {
   position: relative;
 }
 
+.bar:hover .progress-bar {
+  background-color: rgba(50, 205, 50, 0.53);
+}
+
 .percent {
   position: absolute;
   z-index: 5;
-  left: calc(50% - 20px);
+  text-align: center;
+  margin: 0 auto;
   right: 0;
-  top: 0;
-  bottom: 0;
+  left: 0;
+}
+
+.start, .end, .days-left {
+  position: absolute;
+  opacity: 0;
+  z-index: 10;
+  color: #3f3f3f;
+}
+
+.bar:hover .start, .bar:hover .end, .bar:hover .days-left {
+  opacity: 1;
+}
+
+.bar:hover .percent {
+  opacity: 0;
+}
+
+.start {
+  left: 5px;
+}
+
+.end {
+  right: 5px;
+}
+
+.days-left {
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
