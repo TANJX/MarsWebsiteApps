@@ -30,7 +30,7 @@
 <body>
 <div class="title ">
   <div class="container">
-    <h1>Event List</h1>
+    <h1>Events</h1>
     <p>Mars' life</p>
 
   </div>
@@ -57,6 +57,10 @@
       <div>
         <input class="styled-checkbox" id="type-3" type="checkbox" value="value4" onclick="update(0);" checked>
         <label for="type-3">Work</label>
+      </div>
+      <div>
+        <input class="styled-checkbox" id="type-4" type="checkbox" value="value5" onclick="update(0);" checked>
+        <label for="type-4">Device</label>
       </div>
     </div>
     <div class="right">
@@ -140,6 +144,7 @@
             document.getElementById("type-1").checked = document.getElementById("type-all").checked;
             document.getElementById("type-2").checked = document.getElementById("type-all").checked;
             document.getElementById("type-3").checked = document.getElementById("type-all").checked;
+            document.getElementById("type-4").checked = document.getElementById("type-all").checked;
         } else if (all === 2) {
             document.getElementById("time-1").checked = document.getElementById("time-all").checked;
             document.getElementById("time-2").checked = document.getElementById("time-all").checked;
@@ -148,8 +153,9 @@
         // type settings
         const type1 = document.getElementById("type-1").checked,
             type2 = document.getElementById("type-2").checked,
-            type3 = document.getElementById("type-3").checked;
-        document.getElementById("type-all").checked = type1 && type2 && type3;
+            type3 = document.getElementById("type-3").checked,
+            type4 = document.getElementById("type-4").checked;
+        document.getElementById("type-all").checked = type1 && type2 && type3 && type4;
 
         // time settings
         const time1 = document.getElementById("time-1").checked,
@@ -173,6 +179,12 @@
                 }
             } else if (items[j].classList.contains('work')) {
                 if (type3) {
+                    items[j].style.display = "block";
+                } else {
+                    items[j].style.display = "none";
+                }
+            } else if (items[j].classList.contains('device')) {
+                if (type4) {
                     items[j].style.display = "block";
                 } else {
                     items[j].style.display = "none";
