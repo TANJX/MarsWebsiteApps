@@ -90,16 +90,17 @@ echo $doc->saveHTML();
   }
 
   .card {
-    text-align: center;
-    margin: 10px auto;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
   }
 
   .card-body {
-    padding: 2rem 1.25rem 0.7rem;
+    padding: 1.4rem 1.25rem 0.7rem;
   }
 
   .card-subtitle {
-    margin-top: 30px;
+    margin-top: 12px;
+    font-size: .7rem;
   }
 
 </style>

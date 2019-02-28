@@ -7,7 +7,8 @@ if (!validateCookie()) {
 $msg = $_POST['msg'];
 
 include('../php/database.php');
-$sql = "INSERT INTO log (msg,time) VALUES ('$msg',now())";
+$msg = $mysqli->escape_string($msg);
+$sql = "INSERT INTO log (msg,time) VALUES ('$msg',NOW())";
 $mysqli->query($sql);
 $mysqli->close();
 header("Location: http://apps.marstanjx.com/log/");
