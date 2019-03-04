@@ -23,12 +23,13 @@
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 </head>
 <body>
 <div class="container">
   <h1>Coding Activity for <span></span></h1>
   <div class="full">
-    <canvas id="project_chart" width="400" height="200"></canvas>
+    <canvas id="project_chart" width="400" height="150"></canvas>
   </div>
   <div class="flex">
     <div>
