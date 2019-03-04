@@ -1,0 +1,25 @@
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.container {
+  max-width: 1500px;
+  padding: 0 12px;
+  margin: 0 auto;
+}
+
+.full {
+
+}
+
+.flex {
+  display: flex;
+  margin-top: 50px;
+}
+
+.flex div {
+  position: relative;
+  height: 40vh;
+  width: 80vw;
+}

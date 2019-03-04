@@ -36,11 +36,7 @@ function project_chart(user, element) {
                             stacked: true,
                             ticks: {
                                 beginAtZero: true,
-                                callback: function (value) {
-                                    const minutes = moment.duration(value, 'seconds').as('minutes');
-                                    const hour = minutes / 60;
-                                    return Math.floor(hour) + "h " + Math.floor(minutes % 60) + "m";
-                                }
+                                callback: getTimeString
                             }
                         }],
                         xAxes: [{
