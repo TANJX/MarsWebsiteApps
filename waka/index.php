@@ -41,8 +41,7 @@
   </div>
 </div>
 <script src="/waka/js/projects.js"></script>
-<script src="/waka/js/language.js"></script>
-<script src="/waka/js/editor.js"></script>
+<script src="/waka/js/pie.js"></script>
 <script>
     function getTimeString(second) {
         const minutes = moment.duration(second, 'seconds').as('minutes');
@@ -59,8 +58,8 @@
       ?>
         $('h1 span').html(user);
         project_chart(user, "project_chart");
-        language_chart(user, "language_chart");
-        editor_chart(user, "editor_chart");
+        pie_chart(user, "editor", "editor_chart");
+        pie_chart(user, "language", "language_chart");
     })();
 </script>
 </body>
