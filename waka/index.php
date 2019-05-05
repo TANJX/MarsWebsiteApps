@@ -7,21 +7,21 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116224796-1"></script>
   <script>
-      window.dataLayer = window.dataLayer || [];
+  window.dataLayer = window.dataLayer || [];
 
-      function gtag() {
-          dataLayer.push(arguments);
-      }
+  function gtag() {
+    dataLayer.push(arguments);
+  }
 
-      gtag('js', new Date());
-      gtag('config', 'UA-116224796-1');
+  gtag('js', new Date());
+  gtag('config', 'UA-116224796-1');
   </script>
   <link rel="stylesheet" href="/waka/index.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
   <script
-          src="https://code.jquery.com/jquery-3.3.1.min.js"
-          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-          crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway:600" rel="stylesheet">
 </head>
@@ -43,24 +43,28 @@
 <script src="/waka/js/projects.js"></script>
 <script src="/waka/js/pie.js"></script>
 <script>
-    function getTimeString(second) {
-        const minutes = moment.duration(second, 'seconds').as('minutes');
-        const hour = minutes / 60;
-        return Math.floor(hour) + "h " + Math.floor(minutes % 60) + "m";
-    }
+function getTimeString(second) {
+  const minutes = moment.duration(second, 'seconds').as('minutes');
+  const hour = minutes / 60;
+  return Math.floor(hour) + "h " + Math.floor(minutes % 60) + "m";
+}
 
-    (function () {
-        let user = 'mars';
-      <?php
-      $usr = $_GET['user'];
-      if ($usr != '')
-        echo "user = '" . $usr . "';";
-      ?>
-        $('h1 span').html(user);
-        project_chart(user, "project_chart");
-        pie_chart(user, "editor", "editor_chart");
-        pie_chart(user, "language", "language_chart");
-    })();
+(function () {
+  let user = 'mars';
+  let time = 0;
+  <?php
+  $usr = $_GET['user'];
+  if ($usr != '')
+    echo "user = '" . $usr . "';";
+  $time = $_GET['time'];
+  if ($time != '')
+    echo "time = '" . $time . "';";
+  ?>
+  $('h1 span').html(user);
+  project_chart(user, time, "project_chart");
+  pie_chart(user, time, "editor", "editor_chart");
+  pie_chart(user, time, "language", "language_chart");
+})();
 </script>
 </body>
 </html>

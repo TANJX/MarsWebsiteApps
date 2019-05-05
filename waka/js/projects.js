@@ -3,9 +3,9 @@
  * @requires $
  * @requires Chart
  */
-function project_chart(user, element) {
+function project_chart(user, time, element) {
   $.ajax({
-    url: "http://api.marstanjx.com:3000/waka/chart/project/" + user + "", success: function (result) {
+    url: `http://api.marstanjx.com:3000/waka/chart/project/${user}/${time}`, success: function (result) {
       const ctx = document.getElementById(element).getContext('2d');
       new Chart(ctx, {
         type: 'bar',
@@ -54,7 +54,8 @@ function project_chart(user, element) {
               stacked: true,
               ticks: {
                 beginAtZero: true,
-                callback: getTimeString
+                callback: getTimeString,
+                stepSize: 3600,
               }
             }],
             xAxes: [{

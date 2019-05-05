@@ -3,9 +3,9 @@
  * @requires $
  * @requires Chart
  */
-function pie_chart(user, field, element) {
+function pie_chart(user, time, field, element) {
   $.ajax({
-    url: "http://api.marstanjx.com:3000/waka/chart/" + field + "/" + user + "", success: function (result) {
+    url: `http://api.marstanjx.com:3000/waka/chart/${field}/${user}/${time}`, success: function (result) {
       const ctx = document.getElementById(element).getContext('2d');
 
       new Chart(ctx, {
