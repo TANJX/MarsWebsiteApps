@@ -14,7 +14,7 @@ http://apps.marstanjx.com/progress/
 http://apps.marstanjx.com/music/
 
 ## Japanese Notes (Old)
-http://apps.marstanjx.com/event/
+http://apps.marstanjx.com/japanese/
 
 ## Isaac Achievement
 http://apps.marstanjx.com/isaac/
