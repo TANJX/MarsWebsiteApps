@@ -19,6 +19,7 @@
   position: fixed;
   top: 10%;
   right: 10%;
+  max-width: 800px;
 }
 
 .container > img {
@@ -50,7 +51,23 @@
   margin-top: 20px;
   font-size: 1.2rem;
   color: #ececec;
+  font-weight: lighter;
 }
+
+@media screen and (max-width: 1400px) {
+  .container {
+    top: 60px;
+    right: 40px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    top: 60px;
+    right: 40px;
+  }
+}
+
 
 @media (max-width: 991px) {
   .apps {
@@ -60,9 +77,25 @@
   .app {
     width: 33.3%;
   }
+
+  .container {
+    max-width: 470px;
+  }
 }
 
 @media (max-width: 576px) {
+  .container {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .container > img {
+    height: 30px;
+    margin-top: 20px;
+  }
+
   .apps {
     width: 80%;
     margin: 0 auto;
@@ -75,5 +108,12 @@
 
   .app h2 {
     font-size: 1.0rem;
+  }
+}
+
+@media (max-width: 376px) {
+  .container > img {
+    height: 20px;
+    margin-right: 6px;
   }
 }
