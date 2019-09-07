@@ -1,0 +1,119 @@
+.background {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: #232323;
+}
+
+.background svg {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  max-width: 800px;
+}
+
+.container > img {
+  height: 40px;
+  display: block;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.apps {
+  padding-top: 40px;
+  display: flex;
+  transition: .2s;
+  justify-content: space-between;
+}
+
+.app:hover {
+  opacity: .8;
+}
+
+.app {
+  flex-grow: 1;
+  width: calc(100% / 6);
+  text-align: center;
+  max-width: 250px;
+}
+
+.app h2 {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ececec;
+  font-weight: lighter;
+}
+
+@media screen and (max-width: 1400px) {
+  .container {
+    top: 60px;
+    right: 40px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    top: 60px;
+    right: 40px;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .apps {
+    flex-wrap: wrap;
+  }
+
+  .app {
+    width: 33.3%;
+  }
+
+  .container {
+    max-width: 470px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .container > img {
+    height: 30px;
+    margin-top: 20px;
+  }
+
+  .apps {
+    width: 80%;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .app {
+    width: 50%;
+  }
+
+  .app h2 {
+    font-size: 1.0rem;
+  }
+}
+
+@media (max-width: 376px) {
+  .container > img {
+    height: 20px;
+    margin-right: 6px;
+  }
+}
