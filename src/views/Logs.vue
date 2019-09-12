@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title ">
+    <div class="title">
       <div class="container">
         <h1>Log</h1>
         <p>Mars' life</p>

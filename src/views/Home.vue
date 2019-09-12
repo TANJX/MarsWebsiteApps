@@ -26,10 +26,10 @@
           </a>
         </div>
         <div class="app">
-          <a class="nav-link active" href="isaac/">
+          <router-link class="nav-link active" to="isaac">
             <img src="../icon/isaac.svg" class="app-icon" alt="isaac">
             <h2 class="app-name">Isaac</h2>
-          </a>
+          </router-link>
         </div>
         <div class="app">
           <a class="nav-link active" href="http://demo.marstanjx.com/weather/">
@@ -46,34 +46,34 @@
           </a>
         </div>
         <div class="app">
-          <a class="nav-link active" href="log/">
+          <router-link class="nav-link active" to="log">
             <img src="../icon/log.svg" class="app-icon" alt="log">
             <h2 class="app-name">Log</h2>
-          </a>
+          </router-link>
         </div>
         <div class="app">
-          <a class="nav-link active" href="event/">
+          <router-link class="nav-link active" to="event">
             <img src="../icon/event.svg" class="app-icon" alt="event">
             <h2 class="app-name">Event</h2>
-          </a>
+          </router-link>
         </div>
         <div class="app">
-          <a class="nav-link active" href="progress/">
+          <router-link class="nav-link active" to="progress">
             <img src="../icon/progress.svg" class="app-icon" alt="progress">
             <h2 class="app-name">Progress</h2>
-          </a>
+          </router-link>
         </div>
         <div class="app">
-          <a class="nav-link active" href="music/">
+          <router-link class="nav-link active" to="music">
             <img src="../icon/music.svg" class="app-icon" alt="music">
             <h2 class="app-name">Scale</h2>
-          </a>
+          </router-link>
         </div>
         <div class="app">
-          <a class="nav-link active" href="japanese/">
+          <router-link class="nav-link active" to="japanese">
             <img src="../icon/japanese.svg" class="app-icon" alt="japanese">
             <h2 class="app-name">Japanese</h2>
-          </a>
+          </router-link>
         </div>
       </div>
       <p>Mars Inc Apps is under maintenance</p>
