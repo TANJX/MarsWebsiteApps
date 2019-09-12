@@ -54,6 +54,12 @@
   font-weight: lighter;
 }
 
+p {
+  color: white;
+  text-align: right;
+  margin-top: 12px;
+}
+
 @media screen and (max-width: 1400px) {
   .container {
     top: 60px;
