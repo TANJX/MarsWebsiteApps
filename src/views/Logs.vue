@@ -9,21 +9,37 @@
 
     <div class="main container">
       <a class="nav-link" href="#">New Log</a>
-
     </div>
+
+    <LogCard v-for="(log, index) in logs" :key="index" :log="log"></LogCard>
+
   </div>
 </template>
 
 <script>
+import LogCard from "../components/LogCard";
+
+const axios = require('axios');
+
 export default {
   name: 'home',
   data() {
-    return {};
+    return {
+      logs: [],
+    };
+  },
+  components: {
+    LogCard
   },
   methods: {},
   mounted() {
-    // update from API
-
+    axios.get('http://api.marstanjx.com:3000/apps/log/list')
+      .then((response) => {
+        this.log = response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
 };
 </script>
@@ -34,6 +50,9 @@ export default {
   }
 
   .title {
+    padding-top: 25px;
+    padding-bottom: 1px;
+    margin-bottom: 5px;
     background-color: #b4b4b4;
   }
 
