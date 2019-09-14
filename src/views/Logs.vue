@@ -9,17 +9,15 @@
 
     <div class="main container">
       <a class="nav-link" href="#">New Log</a>
+      <LogCard v-for="(log, index) in logs" :key="index" :log="log"></LogCard>
     </div>
-
-    <LogCard v-for="(log, index) in logs" :key="index" :log="log"></LogCard>
-
   </div>
 </template>
 
 <script>
-import LogCard from "../components/LogCard";
+import LogCard from '../components/LogCard.vue';
+import { logsGet } from '../data';
 
-const axios = require('axios');
 
 export default {
   name: 'home',
@@ -29,17 +27,13 @@ export default {
     };
   },
   components: {
-    LogCard
+    LogCard,
   },
   methods: {},
   mounted() {
-    axios.get('http://api.marstanjx.com:3000/apps/log/list')
-      .then((response) => {
-        this.log = response.data;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    logsGet().then((data) => {
+      this.logs = data;
+    });
   },
 };
 </script>

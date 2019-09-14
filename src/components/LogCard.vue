@@ -13,11 +13,11 @@
 
 <script>
 export default {
-  name: "LogCard",
+  name: 'LogCard',
   props: {
-    log: Object
-  }
-}
+    log: Object,
+  },
+};
 </script>
 
 <style scoped>
