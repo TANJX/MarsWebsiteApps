@@ -5,8 +5,13 @@
 </template>
 
 <script>
+import { getTokenFromLocalStorage } from './data';
+
 export default {
   name: 'app',
+  mounted() {
+    getTokenFromLocalStorage();
+  },
 };
 </script>
 

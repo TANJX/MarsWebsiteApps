@@ -1,4 +1,4 @@
-body {
+div {
   user-select: none;
 }
 
@@ -64,6 +64,12 @@ p {
   margin-top: 12px;
 }
 
+.container.login {
+  text-align: right;
+  bottom: 50px;
+  top: unset;
+}
+
 @media screen and (max-width: 1400px) {
   .container {
     top: 60px;
@@ -118,6 +124,9 @@ p {
 
   .app h2 {
     font-size: 1.0rem;
+  }
+  p {
+    text-align: center;
   }
 }
 

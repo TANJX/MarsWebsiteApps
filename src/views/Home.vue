@@ -78,16 +78,28 @@
       </div>
       <p>Mars Inc Apps is under maintenance</p>
     </div>
+
+    <div class="container login">
+      <p v-if="isLoggedIn">Hello, Mars</p>
+      <router-link v-else to="login">Login</router-link>
+    </div>
   </div>
 </template>
 
 <script>
+
+import { checkToken } from '../data';
+
 export default {
   name: 'home',
   data() {
     return {
+      isLoggedIn: false,
       showHidden: false,
     };
+  },
+  mounted() {
+    this.isLoggedIn = checkToken();
   },
   methods: {
     handleMouseMove(event) {
@@ -102,5 +114,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/index";
+  @import "../styles/index";
 </style>

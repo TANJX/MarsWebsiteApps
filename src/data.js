@@ -2,6 +2,8 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
+import moment from 'moment';
+
 const base_url = 'https://api.marstanjx.com/apps/';
 
 const ApiService = {
@@ -43,9 +45,36 @@ const ApiService = {
   },
 };
 
+const token_info = {};
+
+function getTokenFromLocalStorage() {
+  const t = localStorage.getItem('token');
+  const e = localStorage.getItem('expire');
+  if (t && e) {
+    token_info.token = t;
+    token_info.expire = e;
+  }
+}
+
+function checkToken() {
+  getTokenFromLocalStorage();
+  if (token_info.expire) {
+    return moment(token_info.expire).isAfter();
+  }
+  return false;
+}
+
 async function login(name, password) {
-  const response = await ApiService.post('login', { name, password });
-  return response.data;
+  try {
+    const response = await ApiService.post('login', { name, password });
+    token_info.token = response.data.token;
+    token_info.expire = response.data.expire;
+    localStorage.setItem('token', token_info.token);
+    localStorage.setItem('expire', token_info.expire);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 async function logsGet() {
@@ -53,12 +82,16 @@ async function logsGet() {
   return response.data;
 }
 
-function logsAdd(msg) {
-
+async function logsAdd(msg) {
+  const response = await ApiService.post('log/add', { token, msg });
+  return response.data;
 }
 
 export {
   ApiService,
+  getTokenFromLocalStorage,
+  checkToken,
   logsGet,
   logsAdd,
+  login,
 };

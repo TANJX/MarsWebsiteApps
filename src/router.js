@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 // Views
 import Home from './views/Home.vue';
 import Logs from './views/Logs.vue';
+import Login from './views/Login.vue';
 
 
 Vue.use(VueRouter);
@@ -16,6 +17,14 @@ const router = new VueRouter({
       name: 'Home',
       meta: {
         title: 'Home',
+      },
+    },
+    {
+      path: '/login',
+      component: Login,
+      name: 'Login',
+      meta: {
+        title: 'Login',
       },
     },
     {
