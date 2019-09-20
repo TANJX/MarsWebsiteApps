@@ -84,11 +84,24 @@ async function logsAdd(msg) {
   return response.data;
 }
 
+async function eventsGet() {
+  const response = await ApiService.get('event/list');
+  return response.data;
+}
+
+async function eventsAdd(title, time) {
+  const response = await ApiService.post('event/add',
+    { token: token_info.token, title, time });
+  return response.data;
+}
+
 export {
   ApiService,
   getTokenFromLocalStorage,
   checkToken,
   logsGet,
   logsAdd,
+  eventsGet,
+  eventsAdd,
   login,
 };

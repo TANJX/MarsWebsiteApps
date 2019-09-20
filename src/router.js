@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 // Views
 import Home from './views/Home.vue';
 import Logs from './views/Logs.vue';
+import Events from './views/Events.vue';
 import Login from './views/Login.vue';
 
 
@@ -33,6 +34,14 @@ const router = new VueRouter({
       name: 'Logs',
       meta: {
         title: 'Logs',
+      },
+    },
+    {
+      path: '/event',
+      component: Events,
+      name: 'Events',
+      meta: {
+        title: 'Events',
       },
     },
   ],
