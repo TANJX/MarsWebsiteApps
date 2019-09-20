@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.push('/login');
+      this.$router.push('/');
     },
     validate() {
       this.submit_disabled = !(this.name && this.password);

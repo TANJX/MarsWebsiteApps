@@ -16,7 +16,7 @@ const ApiService = {
     console.log(`Sending GET ${resource}/${slug}`);
     return Vue.axios.get(`${resource}/${slug}`).catch((error) => {
       console.error(`Error: ${error.message} (${error.response.data.errors.message})`);
-      throw new Error(`ApiService ${error.message}`);
+      return error.response;
     });
   },
 
@@ -24,7 +24,7 @@ const ApiService = {
     console.log(`Sending POST ${resource}`, params);
     return Vue.axios.post(`${resource}`, params).catch((error) => {
       console.error(`Error: ${error.message} (${error.response.data.errors.message})`);
-      throw new Error(`ApiService ${error.message}`);
+      return error.response;
     });
   },
 
@@ -32,7 +32,7 @@ const ApiService = {
     console.log(`Sending PUT ${resource}`, params);
     return Vue.axios.put(`${resource}`, params).catch((error) => {
       console.error(`Error: ${error.message} (${error.response.data.errors.message})`);
-      throw new Error(`ApiService ${error.message}`);
+      return error.response;
     });
   },
 
@@ -40,7 +40,7 @@ const ApiService = {
     console.log(`Sending DELETE ${resource}`);
     return Vue.axios.delete(resource).catch((error) => {
       console.error(`Error: ${error.message} (${error.response.data.errors.message})`);
-      throw new Error(`ApiService ${error.response.data}`);
+      return error.response;
     });
   },
 };
@@ -65,16 +65,13 @@ function checkToken() {
 }
 
 async function login(name, password) {
-  try {
-    const response = await ApiService.post('login', { name, password });
-    token_info.token = response.data.token;
-    token_info.expire = response.data.expire;
-    localStorage.setItem('token', token_info.token);
-    localStorage.setItem('expire', token_info.expire);
-    return true;
-  } catch (e) {
-    return false;
-  }
+  const response = await ApiService.post('login', { name, password });
+  if (response.data.errors) return false;
+  token_info.token = response.data.token;
+  token_info.expire = response.data.expire;
+  localStorage.setItem('token', token_info.token);
+  localStorage.setItem('expire', token_info.expire);
+  return true;
 }
 
 async function logsGet() {
@@ -83,7 +80,7 @@ async function logsGet() {
 }
 
 async function logsAdd(msg) {
-  const response = await ApiService.post('log/add', { token, msg });
+  const response = await ApiService.post('log/add', { token: token_info.token, msg });
   return response.data;
 }
 
