@@ -1,6 +1,10 @@
 # MarsWebsiteApps
 Apps for Mars
 
+    This is the first major version of MarsWebsiteApps. 
+    No more changes will be made.
+    Do not modify!
+
 ## Log
 http://apps.marstanjx.com/log/
 
