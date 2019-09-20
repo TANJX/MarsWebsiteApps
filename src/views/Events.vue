@@ -19,6 +19,15 @@
               <label :for="'type-' + index">{{filter}}</label>
             </div>
           </div>
+          <div class="right">
+            <div v-for="(filter, index) in filter_2" :key="index">
+              <input
+                class="styled-checkbox" :id="'type2-' + index" type="checkbox"
+                v-model="checked_filter_2" v-bind:value="index"
+              >
+              <label :for="'type2-' + index">{{filter}}</label>
+            </div>
+          </div>
           <div class="right"></div>
         </div>
         <div class="new-log" v-show="logged_in">
@@ -28,7 +37,7 @@
         </div>
         <EventCard
           v-for="(event, index) in events" :key="index" :event="event"
-          v-show="event.filter_1"
+          v-show="event.filter_1 && event.filter_2"
         ></EventCard>
       </div>
     </div>
@@ -52,6 +61,7 @@ export default {
       checked_filter_1: [0, 1, 2, 3, 4],
       checked_filter_2: [0, 1, 2],
       checked_filter_ignored_1: false,
+      checked_filter_ignored_2: false,
     };
   },
   computed: {
@@ -100,6 +110,46 @@ export default {
         }
       }
     },
+    checked_filter_2(new_var, old_var) {
+      this.events.forEach((e) => {
+        if (new_var.includes(1) && moment(e.date).diff(moment(), 'days') < 0) {
+          e.filter_2 = true;
+        } else if (new_var.includes(2) && moment(e.date).diff(moment(), 'days') >= 0) {
+          e.filter_2 = true;
+        } else {
+          e.filter_2 = false;
+        }
+      });
+
+      if (this.checked_filter_ignored_2) {
+        this.checked_filter_ignored_2 = false;
+        return;
+      }
+      // All was selected
+      if (old_var.includes(0)) {
+        if (!new_var.includes(0)) {
+          this.checked_filter_2 = [];
+        } else {
+          for (let i = 0; i < this.checked_filter_2.length; i++) {
+            if (this.checked_filter_2[i] === 0) {
+              this.checked_filter_2.splice(i, 1);
+              break;
+            }
+          }
+        }
+        this.checked_filter_ignored_2 = true;
+      }
+      // All was not selected
+      if (!old_var.includes(0)) {
+        if (new_var.includes(0)) {
+          this.checked_filter_2 = [...Array(this.filter_2.length).keys()];
+          this.checked_filter_ignored_2 = true;
+        } else if (new_var.length === this.filter_2.length - 1) {
+          this.checked_filter_2.push(0);
+          this.checked_filter_ignored_2 = true;
+        }
+      }
+    },
   },
   methods: {
     addEvent() {
@@ -108,6 +158,19 @@ export default {
       eventsGet().then((data) => {
         this.events = data;
         this.events.sort((a, b) => moment(a.date).diff(moment(b.date), 'days'));
+        this.events.forEach((e) => {
+          const ind = this.filter_1.findIndex(type => type.toLowerCase() === e.type);
+          if (ind < 0) e.filter_1 = false;
+          e.filter_1 = this.checked_filter_1.includes(ind);
+
+          if (this.checked_filter_2.includes(1) && moment(e.date).diff(moment(), 'days') < 0) {
+            e.filter_2 = true;
+          } else if (this.checked_filter_2.includes(2) && moment(e.date).diff(moment(), 'days') >= 0) {
+            e.filter_2 = true;
+          } else {
+            e.filter_2 = false;
+          }
+        });
       });
     },
   },
