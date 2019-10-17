@@ -20,9 +20,9 @@
       <img src="../img/title.svg" alt="Title">
       <div class="apps" v-if="showHidden">
         <div class="app">
-          <a class="nav-link active" href="http://notes.marstanjx.com/n3">
+          <a class="nav-link active" target="_blank" href="http://apps.marstanjx.com/japanese">
             <img src="../icon/japanese-2.svg" class="app-icon" alt="japanese">
-            <h2 class="app-name">Japanese N2</h2>
+            <h2 class="app-name">Japanese (Legacy)</h2>
           </a>
         </div>
         <div class="app">
@@ -30,12 +30,6 @@
             <img src="../icon/isaac.svg" class="app-icon" alt="isaac">
             <h2 class="app-name">Isaac</h2>
           </router-link>
-        </div>
-        <div class="app">
-          <a class="nav-link active" href="http://demo.marstanjx.com/weather/">
-            <img src="../icon/weather.svg" class="app-icon" alt="weather">
-            <h2 class="app-name">Weather</h2>
-          </a>
         </div>
       </div>
       <div class="apps" v-else>
@@ -70,10 +64,10 @@
           </router-link>
         </div>
         <div class="app">
-          <router-link class="nav-link active" to="japanese">
+          <a class="nav-link active" target="_blank" href="https://notes.marstanjx.com">
             <img src="../icon/japanese.svg" class="app-icon" alt="japanese">
             <h2 class="app-name">Japanese</h2>
-          </router-link>
+          </a>
         </div>
       </div>
       <p>Mars Inc Apps is under maintenance</p>

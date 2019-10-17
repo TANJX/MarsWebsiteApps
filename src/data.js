@@ -89,9 +89,11 @@ async function eventsGet() {
   return response.data;
 }
 
-async function eventsAdd(title, time) {
+async function eventsAdd(name, date, type) {
   const response = await ApiService.post('event/add',
-    { token: token_info.token, title, time });
+    {
+      token: token_info.token, name, date, type,
+    });
   return response.data;
 }
 

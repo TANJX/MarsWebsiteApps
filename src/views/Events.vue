@@ -30,9 +30,9 @@
           </div>
           <div class="right"></div>
         </div>
-        <div class="new-log" v-show="logged_in">
+        <div class="new-event" v-show="logged_in">
           <i class="material-icons"
-             @click="addEvent"
+             @click="modal_on = true"
           >add_circle_outline</i>
         </div>
         <EventCard
@@ -42,6 +42,53 @@
       </div>
     </div>
     <Footer></Footer>
+
+    <div class="modal" v-show="modal_on" @click="modal_on = false">
+      <div class="modal-container" @click.stop>
+        <div class="modal-head">
+          <h2>Add an Event</h2>
+        </div>
+        <div class="modal-body">
+          <div class=" form-group">
+            <label for="inputName" class="bmd-label-floating ">Name</label>
+            <input
+              id="inputName" class="form-control"
+              placeholder="Type in text" type="text" required
+              v-model="new_event.name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="inputDate" class="bmd-label-floating ">Date</label>
+            <input
+              id="inputDate" name="date" class="form-control " required
+              type="date"
+              v-model="new_event.date"
+            />
+          </div>
+          <div class="form-group">
+            <label for="inputType" class="bmd-label-floating ">Type</label>
+            <select
+              id="inputType" name="type" class="custom-select mb-2 mr-sm-2 mb-sm-0"
+              v-model="new_event.type"
+            >
+              <option selected value="default">Choose...</option>
+              <option value="school">School</option>
+              <option value="life">Life</option>
+              <option value="work">Work</option>
+              <option value="device">Device</option>
+            </select>
+          </div>
+          <div class="button-div">
+            <button
+              class="btn btn-primary btn-raised"
+              :disabled="!form_valid"
+              @click="addEvent"
+            >Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,11 +109,20 @@ export default {
       checked_filter_2: [0, 1, 2],
       checked_filter_ignored_1: false,
       checked_filter_ignored_2: false,
+      new_event: {
+        name: '',
+        date: '',
+        type: 'default',
+      },
+      modal_on: false,
     };
   },
   computed: {
     logged_in() {
       return checkToken();
+    },
+    form_valid() {
+      return this.new_event.name && this.new_event.date && this.new_event.type !== 'default';
     },
   },
   components: {
@@ -150,9 +206,29 @@ export default {
         }
       }
     },
+    modal_on(new_var) {
+      if (new_var) {
+        document.body.classList.add('modal-on');
+      } else {
+        document.body.classList.remove('modal-on');
+      }
+    },
   },
   methods: {
     addEvent() {
+      if (!this.form_valid) {
+        return;
+      }
+      this.modal_on = false;
+      const date = moment(this.new_event.date).format('YYYY-MM-DD');
+      eventsAdd(this.new_event.name, date, this.new_event.type).then(() => {
+        this.updateEvent();
+        this.new_event = {
+          name: '',
+          date: '',
+          type: 'default',
+        };
+      });
     },
     updateEvent() {
       eventsGet().then((data) => {
@@ -180,112 +256,164 @@ export default {
 };
 </script>
 
+<style lang="scss">
+body.modal-on {
+  overflow: hidden;
+}
+</style>
+
 <style scoped lang="scss">
-  .main {
-    font-family: "source-han-sans-japanese", "source-han-sans-simplified-c", sans-serif;
-    margin-bottom: 250px;
-  }
+.main {
+  font-family: "source-han-sans-japanese", "source-han-sans-simplified-c", sans-serif;
+  margin-bottom: 250px;
+}
 
-  .title {
-    padding-top: 25px;
-    padding-bottom: 1px;
-    margin-bottom: 5px;
-    background-color: greenyellow;
-  }
+.title {
+  padding-top: 25px;
+  padding-bottom: 1px;
+  margin-bottom: 5px;
+  background-color: greenyellow;
+}
 
-  .material-icons {
-    font-size: 48px;
-    display: block;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    padding: 15px 0;
-  }
+.material-icons {
+  font-size: 48px;
+  display: block;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  padding: 15px 0;
+}
 
-  .material-icons.disabled {
-    color: #b1b1b1;
-    cursor: default;
-  }
+.material-icons.disabled {
+  color: #b1b1b1;
+  cursor: default;
+}
 
-  .card {
-    margin: 0 auto;
-  }
+.card {
+  margin: 0 auto;
+}
 
-  // checkboxes
+// checkboxes
 
-  .selection-checkboxes div div {
-    display: inline;
-    margin-right: 10px;
-    margin-left: 10px;
-  }
+.selection-checkboxes div div {
+  display: inline;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 
-  .selection-checkboxes {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.selection-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.styled-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.styled-checkbox + label {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+}
+
+.styled-checkbox + label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  width: 20px;
+  height: 20px;
+  background: #ccc;
+  border: 1px solid #999;
+}
+
+.styled-checkbox:hover + label:before {
+  background-color: greenyellow;
+}
+
+.styled-checkbox:focus + label:before {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+
+.styled-checkbox:checked + label:before {
+  background-color: lawngreen;
+  border: 0 solid #999;
+}
+
+.styled-checkbox:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 9px;
+  background: white;
+  width: 2px;
+  height: 2px;
+  box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 768px) {
+  .left {
+    padding-bottom: 10px;
   }
 
   .right {
-    margin-left: auto;
+    padding-top: 10px;
+    width: 100%;
+    margin-left: 0;
+    border-top: 1px solid #787878;
   }
+}
 
-  .styled-checkbox {
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.25);
+  display: block;
+
+  .modal-container {
+    /*height: 300px;*/
+    width: 400px;
     position: absolute;
-    opacity: 0;
+    left: 50%;
+    top: 50%;
+    background-color: white;
+    display: block;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+
   }
 
-  .styled-checkbox + label {
-    position: relative;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .styled-checkbox + label:before {
-    content: '';
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: text-top;
-    width: 20px;
-    height: 20px;
-    background: #ccc;
-    border: 1px solid #999;
-  }
-
-  .styled-checkbox:hover + label:before {
+  .modal-head {
+    height: 60px;
     background-color: greenyellow;
-  }
+    padding: 17px 30px 0;
 
-  .styled-checkbox:focus + label:before {
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
-  }
-
-  .styled-checkbox:checked + label:before {
-    background-color: lawngreen;
-    border: 0 solid #999;
-  }
-
-  .styled-checkbox:checked + label:after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 9px;
-    background: white;
-    width: 2px;
-    height: 2px;
-    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
-    transform: rotate(45deg);
-  }
-
-  @media (max-width: 768px) {
-    .left {
-      padding-bottom: 10px;
-    }
-
-    .right {
-      padding-top: 10px;
-      width: 100%;
-      margin-left: 0;
-      border-top: 1px solid #787878;
+    h2 {
+      font-size: 1.6rem;
     }
   }
+
+  .modal-body {
+    padding: 15px 30px 15px;
+
+    .button-div {
+      text-align: right;
+    }
+
+    select {
+      margin-left: 25px;
+    }
+  }
+}
 </style>
