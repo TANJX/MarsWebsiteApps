@@ -5,7 +5,8 @@
  */
 function project_chart(user, time, element) {
   $.ajax({
-    url: `http://api.marstanjx.com:3000/waka/chart/project/${user}/${time}`, success: function (result) {
+    url: `https://api.marstanjx.com/waka/chart/project/${user}/${time}`,
+    success(result) {
       const ctx = document.getElementById(element).getContext('2d');
       new Chart(ctx, {
         type: 'bar',
@@ -13,11 +14,11 @@ function project_chart(user, time, element) {
         options: {
           tooltips: {
             mode: 'x',
-            filter: function (data) {
-              return data['yLabel'] !== 0;
+            filter(data) {
+              return data.yLabel !== 0;
             },
             callbacks: {
-              label: function (tooltipItem, data) {
+              label(tooltipItem, data) {
                 let label = data.datasets[tooltipItem.datasetIndex].label || '';
 
                 if (label) {
@@ -25,29 +26,28 @@ function project_chart(user, time, element) {
                 }
                 label += moment.duration(tooltipItem.yLabel, 'seconds').humanize();
                 return label;
-              }
-            }
+              },
+            },
           },
           legend: {
             position: 'right',
             labels: {
-              generateLabels: function (chart) {
-                const data = chart.data;
+              generateLabels(chart) {
+                const { data } = chart;
                 if (data.labels.length && data.datasets.length) {
-                  return data.datasets.map(function (dataset, i) {
+                  return data.datasets.map((dataset, i) => {
                     const fill = dataset.backgroundColor;
                     const value = dataset.data.map(obj => obj.y).reduce((result, val) => result + val);
                     return {
-                      text: dataset.label + " : " + getTimeString(value),
+                      text: `${dataset.label} : ${getTimeString(value)}`,
                       fillStyle: fill,
-                      index: i
+                      index: i,
                     };
                   });
-                } else {
-                  return [];
                 }
-              }
-            }
+                return [];
+              },
+            },
           },
           scales: {
             yAxes: [{
@@ -56,14 +56,14 @@ function project_chart(user, time, element) {
                 beginAtZero: true,
                 callback: getTimeString,
                 stepSize: 3600,
-              }
+              },
             }],
             xAxes: [{
               stacked: true,
             }],
-          }
-        }
+          },
+        },
       });
-    }
+    },
   });
 }

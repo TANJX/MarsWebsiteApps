@@ -1,0 +1,9 @@
+RewriteEngine on
+
+DirectorySlash off
+RewriteRule ^([^.]*[^./])$ /$1/ [L,R=301]
+
+RewriteRule ^waka/([a-z]+)/(\d+)/$ waka/index.php?user=$1&time=$2 [NC,L]
+RewriteRule ^waka/([a-z]+)/$ waka/index.php?user=$1 [NC,L]
+
+ErrorDocument 404 /404.html

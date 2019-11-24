@@ -5,7 +5,8 @@
  */
 function pie_chart(user, time, field, element) {
   $.ajax({
-    url: `http://api.marstanjx.com:3000/waka/chart/${field}/${user}/${time}`, success: function (result) {
+    url: `https://api.marstanjx.com/waka/chart/${field}/${user}/${time}`,
+    success(result) {
       const ctx = document.getElementById(element).getContext('2d');
 
       new Chart(ctx, {
@@ -14,7 +15,7 @@ function pie_chart(user, time, field, element) {
         options: {
           tooltips: {
             callbacks: {
-              label: function (tooltipItem, data) {
+              label(tooltipItem, data) {
                 let label = data.labels[tooltipItem.index] || '';
 
                 if (label) {
@@ -22,14 +23,14 @@ function pie_chart(user, time, field, element) {
                 }
                 label += getTimeString(data.datasets[0].data[tooltipItem.index]);
                 return label;
-              }
-            }
+              },
+            },
           },
           legend: {
             position: 'right',
-          }
-        }
+          },
+        },
       });
-    }
+    },
   });
 }
